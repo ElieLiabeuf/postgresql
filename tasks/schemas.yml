@@ -14,3 +14,6 @@
   become_user: "{{ postgresql_admin_user }}"
   with_items: "{{ postgresql_database_schemas }}"
   when: postgresql_databases|length > 0
+  # See: https://github.com/ansible/ansible/issues/16048#issuecomment-229012509
+  vars:
+    ansible_ssh_pipelining: true

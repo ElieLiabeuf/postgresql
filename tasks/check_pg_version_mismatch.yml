@@ -10,6 +10,9 @@
   failed_when: postgresql_binary_version.stdout == ""
   register: postgresql_binary_version
   check_mode: no
+  # See: https://github.com/ansible/ansible/issues/16048#issuecomment-229012509
+  vars:
+    ansible_ssh_pipelining: true
 
 # Check database version
 - name: PostgreSQL | Check database version
@@ -21,6 +24,9 @@
   failed_when: postgresql_database_version.stdout == ""
   register: postgresql_database_version
   check_mode: no
+  # See: https://github.com/ansible/ansible/issues/16048#issuecomment-229012509
+  vars:
+    ansible_ssh_pipelining: true
 
 # If versions do not match, then restart PostgreSQL
 - name: PostgreSQL | Verify binary and database versions match
